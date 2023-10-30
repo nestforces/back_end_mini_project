@@ -3,9 +3,9 @@ const {
   findEventsByIdQuery,
 } = require("../queries/eventQuery");
 
-const createEventService = async (name, userId) => {
+const createEventService = async (name, image, description, sk, date, time, location, discount, maxRefferalCode, categoryId, userId) => {
   try {
-    const res = await createEventQuery(name, userId);
+    const res = await createEventQuery(name, image, description, sk, date, time, location, discount, maxRefferalCode, categoryId, userId);
 
     return res;
   } catch (err) {
