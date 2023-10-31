@@ -5,10 +5,29 @@ const {
 
 const createEventController = async (req, res) => {
   try {
-    const { name, image, description, sk, date, time, location, discount, maxRefferalCode, categoryId } = req.body;
+    const { name, 
+      // image, 
+      description, 
+      sk, 
+      date, 
+      time, 
+      location, 
+      discount, 
+      maxRefferalCode, 
+      categoryId } = req.body;
     const { id } = req.user;
 
-    const result = await createEventService(name, image, description, sk, date, time, location, discount, maxRefferalCode, categoryId, id);
+    const result = await createEventService(name, 
+      // image, 
+      description, 
+      sk, 
+      date, 
+      time, 
+      location, 
+      discount, 
+      maxRefferalCode, 
+      categoryId, 
+      id);
 
     return res.status(200).json({
       message: "Success",

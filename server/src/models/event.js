@@ -43,7 +43,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       categoryId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       userId: {
@@ -59,8 +59,9 @@ module.exports = (sequelize, Sequelize) => {
 
   event.associate = (models) => {
     event.belongsTo(models.user, { foreignKey: "userId" });
-    event.belongsToMany(models.category, {through: "event_category", foreignKey: "categoryId"})
+    event.belongsTo(models.category, { foreignKey: "categoryId"})
     event.hasMany(models.ticket, { foreignKey: "ticketId"})
+    event.hasMany(models.eventAttendee, { foreignKey: "eventAttendeeId"})
   };
 
   return event;

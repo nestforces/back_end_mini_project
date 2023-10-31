@@ -2,11 +2,21 @@ const db = require("../models");
 const { Op } = require("sequelize");
 const event = db.event;
 
-const createEventQuery = async (name, image, description, sk, date, time, location, discount, maxRefferalCode, categoryId, userId) => {
+const createEventQuery = async (name, 
+  // image, 
+  description, 
+  sk, 
+  date, 
+  time, 
+  location, 
+  discount, 
+  maxRefferalCode, 
+  categoryId, 
+  userId) => {
   try {
     const res = await event.create({
       name,
-      image,
+      // image,
       description,
       sk,
       date,

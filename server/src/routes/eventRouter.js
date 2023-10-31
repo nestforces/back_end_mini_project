@@ -7,7 +7,7 @@ const {
   findEventsByIdController,
 } = require("../controllers/eventController");
 
-router.post("/event", verifyToken, checkRoles, createEventController);
+router.post("/", verifyToken, checkRoles, createEventController);
 // router.post("/ticket", verifyToken, checkRoles, createTicketController);
 router.get("/", verifyToken, checkRoles, findEventsByIdController);
 

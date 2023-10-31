@@ -2,19 +2,19 @@ module.exports = (sequelize, Sequelize) => {
     const ticket = sequelize.define(
       "ticket",
       {
-        name: {
+        ticket_name: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        stock: {
+        number_of_ticket: {
             type: Sequelize.INTEGER,
             allowNull: false,
           },
-          price: {
+          ticket_price: {
             type: Sequelize.INTEGER,
             allowNull: false,
           },
-          endSale: {
+          ticket_end_date: {
               type: Sequelize.STRING,
               allowNull:false
           },
@@ -34,8 +34,8 @@ module.exports = (sequelize, Sequelize) => {
     );
   
     ticket.associate = (models) => {
-        ticket.belongsTo(models.event, { foreignKey: "ticketId" });
-        ticket.belongsTo(models.ticketCategory, { foreignKey: "ticketCategoryId"})
+      ticket.belongsTo(models.event, { foreignKey: "ticketId" });
+      ticket.belongsTo(models.ticketCategory, { foreignKey: "ticketCategoryId"})
       ticket.belongsTo(models.priceCategory, { foreignKey: "priceCategoryId"})
     };
   
