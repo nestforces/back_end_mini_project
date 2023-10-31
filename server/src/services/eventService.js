@@ -27,6 +27,9 @@ const createEventService = async (name,
       categoryId, 
       userId);
 
+    console.log("ini nama di service",name);
+
+
     return res;
   } catch (err) {
     throw err;
