@@ -26,6 +26,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false,
           },
+          eventId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+          },
       },
       {
         timestamps: false,
@@ -34,7 +38,7 @@ module.exports = (sequelize, Sequelize) => {
     );
   
     ticket.associate = (models) => {
-      ticket.belongsTo(models.event, { foreignKey: "ticketId" });
+      ticket.belongsTo(models.event, { foreignKey: "eventId" });
       ticket.belongsTo(models.ticketCategory, { foreignKey: "ticketCategoryId"})
       ticket.belongsTo(models.priceCategory, { foreignKey: "priceCategoryId"})
     };

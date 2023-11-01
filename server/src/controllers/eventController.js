@@ -1,6 +1,8 @@
 const {
   createEventService,
   findEventsByIdService,
+  detailEventsByIdService,
+  findTicketsByIdService,
 } = require("../services/eventService");
 
 const createEventController = async (req, res) => {
@@ -57,7 +59,43 @@ const findEventsByIdController = async (req, res) => {
   }
 };
 
+const detailEventsByIdController = async (req, res) => {
+  try {
+    const id = req.params;
+
+    const result = await detailEventsByIdService(id);
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    return res.status(500).send(err?.message);
+  }
+}
+
+const findTicketsByIdController = async (req, res) => {
+  try {
+    const id = req.params;
+
+    const result = await findTicketsByIdService(id);
+    console.log("ini controller",id);
+
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    return res.status(500).send(err?.message);
+  }
+}
+
+
+
 module.exports = {
   createEventController,
   findEventsByIdController,
+  detailEventsByIdController,
+  findTicketsByIdController,
 };

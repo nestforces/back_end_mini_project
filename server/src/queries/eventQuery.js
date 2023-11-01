@@ -1,6 +1,9 @@
 const db = require("../models");
 const { Op } = require("sequelize");
 const event = db.event;
+const user = db.user;
+const ticket = db.ticket;
+const ticketCategory = db.ticketCategory;
 
 const createEventQuery = async (name, 
   // image, 
@@ -48,7 +51,39 @@ const findEventsByIdQuery = async (id) => {
   }
 };
 
+const detailEventsByIdQuery = async (id) => {
+  try {
+    const res = await event.findOne({
+      include:[user],
+      where: {
+        id : id.id,
+      },
+    });
+    return res;
+  } catch (err) {
+    throw err;
+  }
+}
+
+const findTicketsByIdQuery = async (id) => {
+  try {
+    console.log(id);
+    const res = await ticket.findAll({
+      include:[ticketCategory],
+      where: {
+        eventId : id.id,
+      },
+    });
+    return res;
+  } catch (err) {
+    throw err;
+  }
+}
+
+
 module.exports = {
   createEventQuery,
   findEventsByIdQuery,
+  detailEventsByIdQuery,
+  findTicketsByIdQuery,
 };
