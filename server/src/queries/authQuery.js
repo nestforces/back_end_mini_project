@@ -2,15 +2,17 @@ const db = require("../models");
 const { Op } = require("sequelize");
 const user = db.user;
 
-const registerQuery = async (email, username, password, roleId) => {
+const registerQuery = async (email, username, password, roleId, avatar) => {
   const t = await db.sequelize.transaction();
   try {
+
     const res = await user.create(
       {
         email,
         username,
         password,
         roleId,
+        avatar,
       },
       { transaction: t }
     );

@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 
-const registerService = async (email, username, password, roleId) => {
+const registerService = async (email, username, password, roleId, avatar) => {
   try {
     const check = await findUserQuery({ email, username });
 
@@ -13,7 +13,7 @@ const registerService = async (email, username, password, roleId) => {
 
     const hashPassword = await bcrypt.hash(password, salt);
 
-    const res = await registerQuery(email, username, hashPassword, roleId);
+    const res = await registerQuery(email, username, hashPassword, roleId, avatar);
 
     return res;
   } catch (err) {

@@ -6,11 +6,11 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        quantity: {
+        ticketId: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        ticketId: {
+        quantity: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
@@ -24,6 +24,7 @@ module.exports = (sequelize, Sequelize) => {
     transactionItem.associate = (models) => {
         transactionItem.belongsTo(models.transaction, { foreignKey: "transactionId" });
         transactionItem.belongsTo(models.ticket, { foreignKey: "ticketId" });
+        transactionItem.hasOne(models.eventAttendee, { foreignKey: "transactionItemId"});
     };
   
     return transactionItem;

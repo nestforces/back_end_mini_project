@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
       points: {
         type: Sequelize.INTEGER,
       },
+      avatar: {
+        type: Sequelize.STRING
+      },
       roleId: {
         type: Sequelize.INTEGER,
         allowNull: false,

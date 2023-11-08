@@ -8,14 +8,17 @@ const registerController = async (req, res) => {
   try {
     const { email, username, password, roleId } = req.body;
 
-    const result = await registerService(email, username, password, roleId);
+    const result = await registerService(email, username, password, roleId, req.file?.filename);
 
     return res.status(200).json({
       message: "Success",
       data: result,
     });
   } catch (err) {
-    return res.status(500).send(err.message);
+    console.log(err);
+    return res.status(500).json({
+      message: err.message,
+    });
   }
 };
 

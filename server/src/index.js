@@ -16,12 +16,12 @@ const app = new express();
 app.use(bodyParser.json());
 app.use(
   cors(
-  //   {
-  //   origin: [
-  //     process.env.WHITELISTED_DOMAIN &&
-  //       process.env.WHITELISTED_DOMAIN.split(" "),
-  //   ],
-  // }
+    {
+    origin: [
+      process.env.WHITELISTED_DOMAIN &&
+        process.env.WHITELISTED_DOMAIN.split(" "),
+    ],
+  }
   )
 );
 const branchRouter = require("./routes/branchRouter");
@@ -29,12 +29,16 @@ const authRouter = require("./routes/authRouter");
 const eventRouter = require("./routes/eventRouter");
 const ticketRouter = require("./routes/ticketRouter")
 const transactionRouter = require("./routes/transactionRouter")
+const transactionRoute = require("./routes/transactionRoute");
 
 app.use("/branchs", branchRouter);
 app.use("/auth", authRouter);
 app.use("/event", eventRouter);
 app.use("/ticket", ticketRouter);
 app.use("/transaction", transactionRouter);
+app.use("/order", transactionRoute);
+
+app.use("/uploads", express.static(path.join(__dirname, "./public/images")));
 
 app.listen(PORT, (req, res) => {
   console.log(`Server started on port ${PORT}`);

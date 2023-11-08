@@ -4,6 +4,9 @@ const event = db.event;
 const city = db.city;
 const category = db.category;
 const user = db.user;
+const ticket = db.ticket;
+const ticketCategory = db.ticketCategory;
+
 
 const createEventQuery = async (name, 
   image,
@@ -61,6 +64,23 @@ const findCityQuery = async () => {
     const res = await city.findAll()
     return res
   } catch (err){
+    throw (err)
+  }
+};
+const detailEventsByIdQuery = async (id) => {
+  try {
+    const res = await event.findOne({
+      include:[user, {
+        through: { attributes: []},
+        model: category,
+        as: "category"
+      }],
+      where: {
+        id : id.id,
+      },
+    });
+    return res;
+  } catch (err) {
     throw err;
   }
 };
@@ -93,5 +113,6 @@ module.exports = {
   findEventsByIdQuery,
   findCityQuery,
   findCategoryQuery,
+  detailEventsByIdQuery
   // findUserQuery
 };

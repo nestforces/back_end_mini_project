@@ -8,16 +8,20 @@ module.exports = (sequelize, Sequelize) => {
         },
         TotalPrice: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
         status: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        refferalCode: {
+        referralCode: {
           type: Sequelize.STRING,
-          allowNull: false,
-          },
+          allowNull: true,  
+        },
+        referralCodeBy: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
         userId: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -26,12 +30,12 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        eventAttendeeId: {
-            type: Sequelize.INTEGER,
-          },
-        transactionImages: {
-            type: Sequelize.STRING
-          }
+        // eventAttendeeId: {
+        //     type: Sequelize.INTEGER,
+        //   },
+        transactionImages:{
+          type: Sequelize.STRING
+        }
         
       },
       {
