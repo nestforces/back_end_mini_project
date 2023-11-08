@@ -1,12 +1,13 @@
 const {
   createEventQuery,
   findEventsByIdQuery,
-  detailEventsByIdQuery,
-  findTicketsByIdQuery,
+  findCityQuery,
+  findCategoryQuery,
+  // findUserQuery
 } = require("../queries/eventQuery");
 
 const createEventService = async (name, 
-  // image, 
+  image,
   description, 
   sk, 
   date, 
@@ -15,10 +16,13 @@ const createEventService = async (name,
   discount, 
   maxRefferalCode, 
   categoryId, 
-  userId) => {
+  userId,
+  points,
+  cityId,
+  ) => {
   try {
     const res = await createEventQuery(name, 
-      // image, 
+      image,
       description, 
       sk, 
       date, 
@@ -27,9 +31,13 @@ const createEventService = async (name,
       discount, 
       maxRefferalCode, 
       categoryId, 
-      userId);
+      userId,
+      points,
+      cityId,
+      );
 
-    console.log("ini nama di service",name);
+    console.log("ini description di service",description);
+    console.log("ini image di service",image);
 
 
     return res;
@@ -48,31 +56,38 @@ const findEventsByIdService = async (id) => {
   }
 };
 
-const detailEventsByIdService = async (id) => {
-  try {
-    const res = await detailEventsByIdQuery(id);
-
-    return res;
-  } catch (err) {
-    throw err
+const findCityService = async () => {
+  try{
+    const res = await findCityQuery()
+    return res
+  } catch (err){
+    throw(err)
   }
-}
+};
 
-const findTicketsByIdService = async (id) => {
-  try {
-    const res = await findTicketsByIdQuery(id);
-
-    return res;
-  } catch (err) {
-    throw err
+const findCategoryService = async () => {
+  try{
+    const res = await findCategoryQuery()
+    return res
+  } catch (err){
+    throw(err)
   }
-}
+};
+// const findUserService = async (id) => {
+//   try{
+//     const res = await findUserQuery(id)
+//     return res
+//   } catch (err){
+//     throw(err)
+//   }
+// };
 
 
 
 module.exports = {
   findEventsByIdService,
   createEventService,
-  detailEventsByIdService,
-  findTicketsByIdService,
+  findCityService,
+  findCategoryService,
+  // findUserService
 };

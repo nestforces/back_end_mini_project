@@ -17,10 +17,6 @@ module.exports = (sequelize, Sequelize) => {
         refferalCode: {
           type: Sequelize.STRING,
           allowNull: false,
-        },
-        transactionItemId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
           },
         userId: {
           type: Sequelize.INTEGER,
@@ -32,6 +28,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         eventAttendeeId: {
             type: Sequelize.INTEGER,
+          },
+        transactionImages: {
+            type: Sequelize.STRING
           }
         
       },
@@ -42,10 +41,11 @@ module.exports = (sequelize, Sequelize) => {
     );
   
     transaction.associate = (models) => {
-        transaction.belongsTo(models.user, { foreignKey: "userId" });
-        transaction.hasMany(models.category, { foreignKey: "categoryId"})
-        transaction.hasMany(models.ticket, { foreignKey: "ticketId"})
-        transaction.hasMany(models.transactionItem, { foreignKey: "transactionItemId"})
+    transaction.belongsTo(models.user, { foreignKey: "userId" });
+    transaction.belongsTo(models.event, { foreignKey: "eventId" });
+    transaction.hasMany(models.category, { foreignKey: "categoryId"})
+    transaction.hasMany(models.ticket, { foreignKey: "ticketId"})
+    transaction.hasMany(models.transactionItem, { foreignKey: "transactionId"})
     transaction.hasMany(models.eventAttendee, { foreignKey: "eventAttendeeId"})
     };
   

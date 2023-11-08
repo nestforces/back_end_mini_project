@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      avatar: {
+        type: Sequelize.STRING,
+        // allowNull: false,
+      },
     },
     {
       timestamps: false,

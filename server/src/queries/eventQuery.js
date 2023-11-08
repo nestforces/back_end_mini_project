@@ -1,12 +1,12 @@
 const db = require("../models");
 const { Op } = require("sequelize");
 const event = db.event;
+const city = db.city;
+const category = db.category;
 const user = db.user;
-const ticket = db.ticket;
-const ticketCategory = db.ticketCategory;
 
 const createEventQuery = async (name, 
-  // image, 
+  image,
   description, 
   sk, 
   date, 
@@ -15,11 +15,14 @@ const createEventQuery = async (name,
   discount, 
   maxRefferalCode, 
   categoryId, 
-  userId) => {
+  userId,
+  points,
+  cityId,
+  ) => {
   try {
     const res = await event.create({
       name,
-      // image,
+      image,
       description,
       sk,
       date,
@@ -29,6 +32,8 @@ const createEventQuery = async (name,
       maxRefferalCode,
       categoryId,
       userId,
+      points,
+      cityId,
     });
 
     return res;
@@ -51,39 +56,42 @@ const findEventsByIdQuery = async (id) => {
   }
 };
 
-const detailEventsByIdQuery = async (id) => {
-  try {
-    const res = await event.findOne({
-      include:[user],
-      where: {
-        id : id.id,
-      },
-    });
-    return res;
-  } catch (err) {
+const findCityQuery = async () => {
+  try{
+    const res = await city.findAll()
+    return res
+  } catch (err){
     throw err;
   }
-}
-
-const findTicketsByIdQuery = async (id) => {
-  try {
-    console.log(id);
-    const res = await ticket.findAll({
-      include:[ticketCategory],
-      where: {
-        eventId : id.id,
-      },
-    });
-    return res;
-  } catch (err) {
+};
+const findCategoryQuery = async () => {
+  try{
+    const res = await category.findAll()
+    return res
+  } catch (err){
     throw err;
   }
-}
+};
 
+// const findUserQuery = async (id) => {
+//   try{
+//     const res = await user.findOne(
+//       {
+//         where: {
+//           id: id
+//         },
+//       });
+    
+//     return res
+//   } catch (err){
+//     throw err;
+//   }
+// };
 
 module.exports = {
   createEventQuery,
   findEventsByIdQuery,
-  detailEventsByIdQuery,
-  findTicketsByIdQuery,
+  findCityQuery,
+  findCategoryQuery,
+  // findUserQuery
 };

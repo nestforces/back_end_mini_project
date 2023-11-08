@@ -1,25 +1,32 @@
 const {
     createTicketQuery,
-    findTicketsByIdQuery,
+    findEventByIdQuery,
   } = require("../queries/ticketQuery");
   
   const createTicketService = async (
     ticket_name, 
-    ticket_category,
     number_of_ticket, 
     ticket_price, 
     ticket_end_date,
     ticketCategoryId,
-    priceCategoryId,) => {
+    priceCategoryId,
+    eventId) => {
     try {
-      const res = await createTicketQuery(
-        ticket_name, 
-        ticket_category,
+      console.log(ticket_name, 
         number_of_ticket, 
         ticket_price, 
         ticket_end_date,
         ticketCategoryId,
-        priceCategoryId,);
+        priceCategoryId,
+        eventId)
+      const res = await createTicketQuery(
+        ticket_name, 
+        number_of_ticket, 
+        ticket_price, 
+        ticket_end_date,
+        ticketCategoryId,
+        priceCategoryId,
+        eventId);
   
       return res;
     } catch (err) {
@@ -27,9 +34,9 @@ const {
     }
   };
   
-  const findTicketsByIdService = async (id) => {
+  const findEventByIdService = async (id) => {
     try {
-      const res = await findTicketsByIdQuery(id);
+      const res = await findEventByIdQuery(id);
   
       return res;
     } catch (err) {
@@ -38,7 +45,7 @@ const {
   };
   
   module.exports = {
-    findTicketsByIdService,
+    findEventByIdService,
     createTicketService,
   };
   

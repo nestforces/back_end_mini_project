@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
     );
   
     category.associate = (models) => {
-      category.belongsToMany(models.event, { through: "event_category", foreignKey: "categoryId" });
+      category.belongsToMany(models.event, {as: "categoryId", through: "event_category" });
     };
   
     return category;

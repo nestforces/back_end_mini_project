@@ -5,16 +5,17 @@ const { verifyToken, checkRoles } = require("../middleware/auth");
 const {
   createEventController,
   findEventsByIdController,
-  detailEventsByIdController,
-  findTicketsByIdController,
-  findPriceCategoryByIdController,
+  findCityController,
+  findCategoryController,
+  // findUserController
 } = require("../controllers/eventController");
+const { uploadEventFile } = require("../middleware/multer");
 
-router.post("/", verifyToken, checkRoles, createEventController);
+router.post("/", verifyToken, checkRoles, uploadEventFile, createEventController);
 // router.post("/ticket", verifyToken, checkRoles, createTicketController);
 router.get("/", verifyToken, checkRoles, findEventsByIdController);
-router.get("/detail-event/:id",  detailEventsByIdController);
-router.get("/ticket/:id",  findTicketsByIdController);
-
+router.get("/city", findCityController);
+router.get("/category", findCategoryController);
+// router.get("/user", findUserController);
 
 module.exports = router;

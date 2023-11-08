@@ -30,9 +30,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false,
           },
+          ticketCode: {
+            type: Sequelize.STRING,
+          },
       },
       {
-        timestamps: false,
         tableName: "tickets",
       }
     );
@@ -41,6 +43,7 @@ module.exports = (sequelize, Sequelize) => {
       ticket.belongsTo(models.event, { foreignKey: "eventId" });
       ticket.belongsTo(models.ticketCategory, { foreignKey: "ticketCategoryId"})
       ticket.belongsTo(models.priceCategory, { foreignKey: "priceCategoryId"})
+      ticket.hasMany(models.transactionItem, { foreignKey: "ticketId"})
     };
   
     return ticket;

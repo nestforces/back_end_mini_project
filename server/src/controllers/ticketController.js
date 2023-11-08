@@ -1,28 +1,28 @@
 const {
     createTicketService,
-    findTicketsByIdService,
+    findEventByIdService,
   } = require("../services/ticketService");
   
   const createTicketController = async (req, res) => {
     try {
       const { ticket_name,
-        ticket_category, 
         number_of_ticket, 
         ticket_price, 
         ticket_end_date,
         ticketCategoryId,
-        priceCategoryId, } = req.body;
+        priceCategoryId, 
+        eventId} = req.body;
       const { id } = req.user;
-      const { eventId } = req.body;
+      
   
       const result = await createTicketService(
         ticket_name, 
-        ticket_category,
         number_of_ticket, 
         ticket_price, 
         ticket_end_date,
         ticketCategoryId,
-        priceCategoryId,);
+        priceCategoryId,
+        eventId);
   
       return res.status(200).json({
         message: "Success",
@@ -37,11 +37,11 @@ const {
   //   const { name, stock, price, endSale, ticketCategoryId, priceCategoryId } = req.body;
   // }
   
-  const findTicketsByIdController = async (req, res) => {
+  const findEventByIdController = async (req, res) => {
     try {
       const { id } = req.user;
   
-      const result = await findTicketsByIdService(id);
+      const result = await findEventByIdService(id);
   
       return res.status(200).json({
         message: "Success",
@@ -54,6 +54,6 @@ const {
   
   module.exports = {
     createTicketController,
-    findTicketsByIdController,
+    findEventByIdController,
   };
   

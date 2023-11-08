@@ -4,10 +4,10 @@ const router = express.Router();
 const { verifyToken, checkRoles } = require("../middleware/auth");
 const {
   createTicketController,
-  findTicketsByIdController,
+  findEventByIdController,
 } = require("../controllers/ticketController");
 
 router.post("/", verifyToken, checkRoles, createTicketController);
-router.get("/", verifyToken, checkRoles, findTicketsByIdController);
+router.get("/", verifyToken, checkRoles, findEventByIdController);
 
 module.exports = router;

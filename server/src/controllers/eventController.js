@@ -1,14 +1,15 @@
 const {
   createEventService,
   findEventsByIdService,
-  detailEventsByIdService,
-  findTicketsByIdService,
+  findCityService,
+  findCategoryService,
+  // findUserService
 } = require("../services/eventService");
 
 const createEventController = async (req, res) => {
   try {
     const { name, 
-      // image, 
+      image, 
       description, 
       sk, 
       date, 
@@ -16,11 +17,17 @@ const createEventController = async (req, res) => {
       location, 
       discount, 
       maxRefferalCode, 
-      categoryId } = req.body;
+      categoryId,
+      points,
+      cityId, } = req.body;
     const { id } = req.user;
 
+    console.log(categoryId);
+    console.log("ini description di controller",description);
+    console.log("ini SK di controller",sk);
+    console.log("ini image di controller",image);
     const result = await createEventService(name, 
-      // image, 
+      req.file?.filename,
       description, 
       sk, 
       date, 
@@ -29,8 +36,10 @@ const createEventController = async (req, res) => {
       discount, 
       maxRefferalCode, 
       categoryId, 
-      id);
-
+      id,
+      points,
+      cityId, 
+      );
     return res.status(200).json({
       message: "Success",
       data: result,
@@ -59,43 +68,47 @@ const findEventsByIdController = async (req, res) => {
   }
 };
 
-const detailEventsByIdController = async (req, res) => {
-  try {
-    const id = req.params;
-
-    const result = await detailEventsByIdService(id);
-
+const findCityController = async (req, res) => {
+  try{
+    const result = await findCityService();
     return res.status(200).json({
       message: "Success",
       data: result,
     });
-  } catch (err) {
-    return res.status(500).send(err?.message);
+  } catch (err){
+    throw(err)
   }
-}
+};
 
-const findTicketsByIdController = async (req, res) => {
-  try {
-    const id = req.params;
-
-    const result = await findTicketsByIdService(id);
-    console.log("ini controller",id);
-
-
+const findCategoryController = async (req, res) => {
+  try{
+    
+    const result = await findCategoryService()
     return res.status(200).json({
       message: "Success",
       data: result,
     });
-  } catch (err) {
-    return res.status(500).send(err?.message);
+  } catch (err){
+    throw(err)
   }
-}
-
-
+};
+// const findUserController = async (req, res) => {
+//   try{
+//     const {id}  = req.user;
+//     const result = await findUserService(id)
+//     return res.status(200).json({
+//       message: "Success",
+//       data: result,
+//     });
+//   } catch (err){
+//     throw(err)
+//   }
+// };
 
 module.exports = {
   createEventController,
   findEventsByIdController,
-  detailEventsByIdController,
-  findTicketsByIdController,
+  findCityController,
+  findCategoryController,
+  // findUserController
 };
