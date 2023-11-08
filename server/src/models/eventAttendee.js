@@ -14,9 +14,15 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        eventId: {
+        ticketId: {
             type: Sequelize.INTEGER,
           },
+          transactionItemId: {
+            type: Sequelize.INTEGER,
+          },
+        quantity: {
+          type: Sequelize.INTEGER,
+        },
       },
       {
         timestamps: false,
@@ -25,7 +31,7 @@ module.exports = (sequelize, Sequelize) => {
     );
   
     eventAttendee.associate = (models) => {
-        eventAttendee.belongsTo(models.event, { foreignKey: "eventAttendeeId" });
+    eventAttendee.belongsTo(models.transactionItem, { foreignKey: "transactionItemId"})
     };
   
     return eventAttendee;

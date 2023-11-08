@@ -4,6 +4,7 @@ const event = db.event;
 const user = db.user;
 const ticket = db.ticket;
 const ticketCategory = db.ticketCategory;
+const category = db.category
 
 const createEventQuery = async (name, 
   // image, 
@@ -54,7 +55,11 @@ const findEventsByIdQuery = async (id) => {
 const detailEventsByIdQuery = async (id) => {
   try {
     const res = await event.findOne({
-      include:[user],
+      include:[user, {
+        through: { attributes: []},
+        model: category,
+        as: "category"
+      }],
       where: {
         id : id.id,
       },

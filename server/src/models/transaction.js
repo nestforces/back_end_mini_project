@@ -8,20 +8,20 @@ module.exports = (sequelize, Sequelize) => {
         },
         TotalPrice: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
         status: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        refferalCode: {
+        referralCode: {
           type: Sequelize.STRING,
-          allowNull: false,
+          allowNull: true,
         },
-        transactionItemId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-          },
+        referralCodeBy: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
         userId: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -30,9 +30,12 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        eventAttendeeId: {
-            type: Sequelize.INTEGER,
-          }
+        // eventAttendeeId: {
+        //     type: Sequelize.INTEGER,
+        //   },
+        transactionImages:{
+          type: Sequelize.STRING
+        }
         
       },
       {
@@ -43,10 +46,9 @@ module.exports = (sequelize, Sequelize) => {
   
     transaction.associate = (models) => {
         transaction.belongsTo(models.user, { foreignKey: "userId" });
-        transaction.hasMany(models.category, { foreignKey: "categoryId"})
-        transaction.hasMany(models.ticket, { foreignKey: "ticketId"})
-        transaction.hasMany(models.transactionItem, { foreignKey: "transactionItemId"})
-    transaction.hasMany(models.eventAttendee, { foreignKey: "eventAttendeeId"})
+        // transaction.hasMany(models.category, { foreignKey: "categoryId"})
+    // transaction.belongsTo(models.eventAttendee, { foreignKey: "eventAttendeeId"})
+    transaction.belongsTo(models.event, {foreignKey: "eventId"})
     };
   
     return transaction;

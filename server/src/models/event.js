@@ -32,20 +32,30 @@ module.exports = (sequelize, Sequelize) => {
       },
       discount: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
-      maxRefferalCode: {
+      pointToUser: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
-      categoryId: {
+      maxReferralCode: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      // createdAt: {
+      //   type: Sequelize.DATE,
+      //   allowNull: false,
+      //   defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      // },
+      // updatedAt: {
+      //   type: Sequelize.DATE,
+      //   allowNull: false,
+      //   defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      // }
     },
     {
       timestamps: false,
@@ -55,8 +65,9 @@ module.exports = (sequelize, Sequelize) => {
 
   event.associate = (models) => {
     event.belongsTo(models.user, { foreignKey: "userId" });
-    event.belongsToMany(models.category, {through: "event_category", foreignKey: "categoryId"})
+    event.belongsToMany(models.category, {as:"category", through: "event_category"})
     event.hasMany(models.ticket, { foreignKey: "eventId"})
+    event.hasMany(models.transaction, {foreignKey: "eventId"})
   };
 
   return event;
